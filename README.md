@@ -61,7 +61,7 @@ chcp 65001 > nul
 set NODE_TLS_REJECT_UNAUTHORIZED=0
 
 :: Navega até a pasta do projeto
-cd /d "C:\Users\Dell\Desktop\Automação"
+cd /d "C:\Caminho\Para\Seu\Diretorio\Sincronizado"
 
 echo 🤖 Iniciando o Robô Auvo...
 echo ------------------------------------------
