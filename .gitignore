@@ -1,0 +1,36 @@
+# --- Dados Sensíveis e Credenciais ---
+# Nunca suba arquivos que contenham senhas ou logins reais
+.env
+config_privada.py
+*credentials*
+
+# --- Arquivos Gerados pelo Robô (LGPD) ---
+# Ignora as planilhas baixadas e o relatório mestre com dados reais
+*.xlsx
+*.xls
+*.csv
+downloads_temporarios/
+
+# --- Logs e Controle de Execução ---
+# Ignora arquivos de texto gerados pelo script para controle
+status_robo.txt
+*.log
+
+# --- Python e Ambiente Virtual ---
+# Ignora arquivos de compilação do Python e pastas de ambiente
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+
+# --- Configurações de Editores ---
+# Ignora pastas de configuração do VS Code ou outros editores
+.vscode/
+.idea/
+
+# --- Arquivos de Sistema ---
+# Ignora arquivos gerados pelo Windows
+Thumbs.db
+desktop.ini
