@@ -86,7 +86,7 @@ Para automação total (sem cliques):
 3. Na ação Iniciar um programa, selecione o seu arquivo .bat.
 4. Garanta que o PC esteja ligado ou em modo de espera no horário definido.
 
-3. Script de Preparação de Pastas
+## 3. Script de Preparação de Pastas
 Execute o código abaixo em um arquivo .bat para criar automaticamente a estrutura de diretórios necessária:
 
 ```bash
