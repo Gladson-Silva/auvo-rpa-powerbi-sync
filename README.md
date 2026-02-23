@@ -48,9 +48,89 @@ NOME_ARQUIVO_MESTRE = "Seu_Relatorio_Geral.xlsx"
 3. **Validation:** O motor de planilha é acionado de forma invisível via pywin32 para validar fórmulas e garantir que o Power BI receba dados calculados.
 4. **Loading:** O arquivo é salvo no diretório sincronizado e o Power BI Service atualiza os visuais automaticamente via conexão Web.
 
+## 🕒 Automação e Execução
+
+1. Execução via Arquivo de Lote (.bat)
+Para que usuários sem conhecimento técnico em Python possam operar o script, utilize um arquivo .bat:
+
+```bash
+@echo off
+:: Garante que o terminal entenda acentos (UTF-8)
+chcp 65001 > nul
+
+set NODE_TLS_REJECT_UNAUTHORIZED=0
+
+:: Navega até a pasta do projeto
+cd /d "C:\Users\Dell\Desktop\Automação"
+
+echo 🤖 Iniciando o Robô Auvo...
+echo ------------------------------------------
+
+:: Executa o python sem herdar privilégios elevados (se possível) 
+:: ou simplesmente executa o comando padrão se já estiver em modo normal
+python automacao_auvo.py
+
+echo ------------------------------------------
+echo ⚠️ O processo terminou.
+
+:: Aguarda 5 segundos e fecha automaticamente
+echo Fechando em 5 segundos...
+timeout /t 5 /nobreak > nul
+exit
+```
+## 2. Agendador de Tarefas do Windows
+Para automação total (sem cliques):
+
+1. No Agendador de Tarefas, crie uma Tarefa Básica.
+2. Defina o disparador como Diário e escolha o horário (ex: 07:00).
+3. Na ação Iniciar um programa, selecione o seu arquivo .bat.
+4. Garanta que o PC esteja ligado ou em modo de espera no horário definido.
+
+3. Script de Preparação de Pastas
+Execute o código abaixo em um arquivo .bat para criar automaticamente a estrutura de diretórios necessária:
+
+```bash
+@echo off
+setlocal
+title Configurador de Estrutura - Automacao RPA
+
+:: Localiza automaticamente a pasta Documentos do usuário atual
+set "ROOT_DIR=%USERPROFILE%\Documents\AUTOMACAO"
+
+echo ======================================================
+echo    PREPARANDO AMBIENTE PARA O ROBÔ DE DADOS
+echo ======================================================
+echo.
+
+:: Cria a pasta principal
+if not exist "%ROOT_DIR%" (
+    mkdir "%ROOT_DIR%"
+    echo [+] Pasta PRINCIPAL criada em: %ROOT_DIR%
+) else (
+    echo [!] A pasta PRINCIPAL ja existe.
+)
+
+:: Cria a subpasta para os arquivos do Auvo
+if not exist "%ROOT_DIR%\downloads_temporarios" (
+    mkdir "%ROOT_DIR%\downloads_temporarios"
+    echo [+] Subpasta DOWNLOADS_TEMPORARIOS criada.
+) else (
+    echo [!] A subpasta DOWNLOADS_TEMPORARIOS ja existe.
+)
+
+echo.
+echo ======================================================
+echo    ESTRUTURA PRONTA! COLOQUE O SCRIPT PYTHON NA PASTA:
+echo    %ROOT_DIR%
+echo ======================================================
+echo.
+pause
+```
+
 ## 💡 Dicas de Manutenção e Solução de Problemas
 * Power BI Desktop: Mantenha o arquivo .pbix fechado durante a execução do script para evitar erros de permissão de escrita no Excel.
 * Credenciais na Nuvem: Ao publicar o relatório, configure as credenciais no Power BI Service usando o método OAuth2 e nível de privacidade Organizacional para fontes Web/SharePoint.
+* Cache Local: Caso precise baixar dados novos após já ter rodado o script, basta não responder ao prompt de 10 segundos ou selecionar a opção de limpeza no terminal.
 * Timeouts: Se o site de origem estiver lento, ajuste o tempo de espera nas funções do Playwright dentro do script.
 
 
